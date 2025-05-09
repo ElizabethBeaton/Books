@@ -22,6 +22,10 @@ function loopThroughArray() {
     for (let i = 0; i < myLibrary.length; i++) {
         const cardClass = document.getElementById("cardClass");
         const booksbox = document.createElement("div")
+        booksbox.style.border = "3px solid #DCDCDC";
+        booksbox.style.padding = "10px"
+        booksbox.style.margin = "8px"
+        booksbox.style.textAlign = "center"
         booksbox.innerHTML = `
         <h2>${myLibrary[i].title}</h2>
         <p>Author : ${myLibrary[i].author}</p>
