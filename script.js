@@ -17,8 +17,26 @@ addBookToLibrary("Harry Potter", "JKRowling", 190, true);
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, false);
 addBookToLibrary("1984", "George Orwell", 328, true);
 
-console.log(myLibrary)
 
+function loopThroughArray() {
+    for (let i = 0; i < myLibrary.length; i++) {
+        const cardClass = document.getElementById("cardClass");
+        const booksbox = document.createElement("div")
+        booksbox.innerHTML = `
+        <h2>${myLibrary[i].title}</h2>
+        <p>Author : ${myLibrary[i].author}</p>
+        <p>Pages: ${myLibrary[i].numberOfPages}</p>
+        <p>Read: ${myLibrary[i].isRead ? "Yes" : "No"}</p>
+        `;
+        cardClass.appendChild(booksbox);
+    }
+}
+loopThroughArray()
+
+
+
+
+// create function to loop through and then pass this in the textContent
 
 
 
