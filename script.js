@@ -1,3 +1,5 @@
+
+// Array to hold all book objects
 const myLibrary = [];
 
 function Book(title, author, numberOfPages, isRead) {
@@ -37,10 +39,71 @@ function loopThroughArray() {
 }
 loopThroughArray()
 
+//when this button is clicked, it runs display form function, which creates a div with a form that has to be filled in. add requried?
+let newBookButton = document.getElementById("newBookButton")
+newBookButton.addEventListener("click", displayForm) 
+newBookButton.style.backgroundColor = "#DCDCDC";
+newBookButton.style.padding = "16px"
+newBookButton.style.fontSize = "16px"
+newBookButton.style.border = "none"
+newBookButton.style.borderRadius = "6px"
+newBookButton.style.cursor = "pointer"
+newBookButton.style.margin = "6px"
 
 
+function displayForm() {
+  let formContainer = document.getElementById("formContainer");
+  let bookForm = document.createElement("div");
+  bookForm.innerHTML = ` 
+        <form id="myForm">
+            <label for="Title">Book title:</label>
+            <input type="text" id="Title" name="Title" placeholder="Enter book title" required>
+            <br>
+            <label for="Author">Author:</label>
+            <input type="text" id="Author" name="Author" placeholder="Enter book author" required>
+            <br>
+            <label for="numberOfPages">Number of pages:</label>
+            <input type="number" id="numberOfPages" placeholder="Enter amount of pages" required>
+            <br>
+            <label for="isRead">Read or not</label>
+            <input type="checkbox" id="isRead" name="isRead" required>
+            <br>
+        </form>
+    `;
 
-// create function to loop through and then pass this in the textContent
+  formContainer.append(bookForm);
+}
+
+
+let addBookButton = document.getElementById("addBookButton");
+addBookButton.addEventListener("click", addToArray);
+addBookButton.style.backgroundColor = "#DCDCDC";
+addBookButton.style.padding = "16px";
+addBookButton.style.fontSize = "16px";
+addBookButton.style.border = "none";
+addBookButton.style.borderRadius = "6px";
+addBookButton.style.cursor = "pointer";
+addBookButton.style.margin = "6px";
+
+function addToArray() {
+    let title = document.getElementById("Title").value
+    let author = document.getElementById("Author").value
+    let pages = document.getElementById("numberOfPages").value
+    let isRead = document.getElementById("isRead").checked
+
+    if (title === "" || author === "" || pages === "") {
+      // didnt include isRead as no check would just mean false
+      alert("You must fill out all fields");
+      return  // return to stop the function from continuing any further if this condition is met
+    }
+    
+    addBookToLibrary(title, author, pages, isRead);
+
+    document.getElementById("formContainer").innerHTML = "";
+    document.getElementById("cardClass").innerHTML = "";
+
+    loopThroughArray()
+}
 
 
 
