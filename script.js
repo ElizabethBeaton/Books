@@ -2,24 +2,28 @@
 // Array to hold all book objects
 const myLibrary = [];
 
+// book constructor function
+// each book gets a unique id and its properties set
 function Book(title, author, numberOfPages, isRead) {
-        this.id = crypto.randomUUID();     
+        this.id = crypto.randomUUID();     // generate a uniqu id for each book   
         this.title = title;
         this.author = author;
         this.numberOfPages = numberOfPages;
         this.isRead = isRead;
 }
 
+// add a new book object to the myLibrary array
 function addBookToLibrary(title, author, numberOfPages, isRead) {
     const newBook = new Book(title, author, numberOfPages, isRead);
-
     myLibrary.push(newBook)
 }
+
+// adding some initial books to the library 
 addBookToLibrary("Harry Potter", "JKRowling", 190, true);
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, false);
 addBookToLibrary("1984", "George Orwell", 328, true);
 
-
+// this looks through the myLibrary array and duplicates each book on a card with the styles added below
 function loopThroughArray() {
     for (let i = 0; i < myLibrary.length; i++) {
         const cardClass = document.getElementById("cardClass");
@@ -28,18 +32,20 @@ function loopThroughArray() {
         booksbox.style.padding = "10px"
         booksbox.style.margin = "8px"
         booksbox.style.textAlign = "center"
+
+        // this is the content thatll be used in the cards
         booksbox.innerHTML = `
         <h2>${myLibrary[i].title}</h2>
         <p>Author : ${myLibrary[i].author}</p>
         <p>Pages: ${myLibrary[i].numberOfPages}</p>
         <p>Read: ${myLibrary[i].isRead ? "Yes" : "No"}</p>
         `;
-        cardClass.appendChild(booksbox);
+        cardClass.appendChild(booksbox); // append each book card to the container
     }
 }
 loopThroughArray()
 
-//when this button is clicked, it runs display form function, which creates a div with a form that has to be filled in. add requried?
+//when this button is clicked, it runs display form function, which creates a div with a form that has to be filled in.
 let newBookButton = document.getElementById("newBookButton")
 newBookButton.addEventListener("click", displayForm) 
 newBookButton.style.backgroundColor = "#DCDCDC";
@@ -50,9 +56,9 @@ newBookButton.style.borderRadius = "6px"
 newBookButton.style.cursor = "pointer"
 newBookButton.style.margin = "6px"
 
-
+// displays the form for added a new book
 function displayForm() {
-  let formContainer = document.getElementById("formContainer");
+  let formContainer = document.getElementById("formContainer"); // this si the div im targetting
   let bookForm = document.createElement("div");
   bookForm.innerHTML = ` 
         <form id="myForm">
@@ -71,10 +77,10 @@ function displayForm() {
         </form>
     `;
 
-  formContainer.append(bookForm);
+  formContainer.append(bookForm); // inserts my new div (book form) inside the formContainer div that i noted above
 }
 
-
+// set up "add book" button styling
 let addBookButton = document.getElementById("addBookButton");
 addBookButton.addEventListener("click", addToArray);
 addBookButton.style.backgroundColor = "#DCDCDC";
@@ -85,24 +91,27 @@ addBookButton.style.borderRadius = "6px";
 addBookButton.style.cursor = "pointer";
 addBookButton.style.margin = "6px";
 
+// adding the user submitted form data to the library
 function addToArray() {
-    let title = document.getElementById("Title").value
+    let title = document.getElementById("Title").value     // .value to target the actual input
     let author = document.getElementById("Author").value
     let pages = document.getElementById("numberOfPages").value
-    let isRead = document.getElementById("isRead").checked
+    let isRead = document.getElementById("isRead").checked     // .checked because i used checkbox
 
-    if (title === "" || author === "" || pages === "") {
+    if (title === "" || author === "" || pages === "") {     // if these fields are empty
       // didnt include isRead as no check would just mean false
       alert("You must fill out all fields");
       return  // return to stop the function from continuing any further if this condition is met
     }
     
+    // adding the book to the library array
     addBookToLibrary(title, author, pages, isRead);
 
+    // clears the form and refresh the book display
     document.getElementById("formContainer").innerHTML = "";
-    document.getElementById("cardClass").innerHTML = "";
+    document.getElementById("cardClass").innerHTML = ""; // removed the form from the page until next use
 
-    loopThroughArray()
+    loopThroughArray() // rerender the updated book list
 }
 
 
